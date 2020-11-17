@@ -1,2 +1,2 @@
-# QLGVDBDQG_CNPM
-<h3>ĐỀ TÀI QUẢN LÝ GIẢI VÔ ĐỊCH BÓNG ĐÁ QUỐC GIA</h3>
+# QLHS_CNPM
+<h3>Quản lý học sinh</h3>
