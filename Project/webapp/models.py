@@ -8,7 +8,7 @@ from enum import Enum
 from sqlalchemy.orm import relationship
 class BaseModel(db.Model):
     __abstract__ = True
-    id = Column(UUIDType(binary=False),primary_key=True,default=uuid.uuid4())
+    id = Column(UUIDType(binary=False),primary_key=True,default=uuid.uuid4)
     name = Column(String,nullable=False)
 
     def __str__(self):
@@ -17,6 +17,11 @@ class BaseModel(db.Model):
 class Role(Enum):
     admin = 2
     giaovien = 1
+
+class Loaidiem(BaseModel):
+    __tablename__ = "Loaidiem"
+    Loaidiem_HS = relationship("DiemMonHoc", backref = "Loaidiems", lazy= True)
+
 
 
 class User(BaseModel, UserMixin):
@@ -55,6 +60,7 @@ class HocSinh(BaseModel):
     diem_mh = relationship('DiemMonHoc', backref='hosohocsinhs', lazy=True)
 
 
+
 class MonHoc(BaseModel):
     __tablename__ = "monhoc"
 
@@ -66,9 +72,9 @@ class DiemMonHoc(BaseModel):
     name = None
     id_hs = Column(UUIDType, ForeignKey(HocSinh.id), primary_key=True, nullable=True)
     id_mh = Column(UUIDType, ForeignKey(MonHoc.id), primary_key=True, nullable=True)
-    hoc_ky = Column(String(20), primary_key=True, nullable=True)
-    nam_hoc = Column(String(20), primary_key=True, nullable=True)
-    loai_diem = Column(String(20), nullable=True)
+    hoc_ky = Column(String(20), nullable=True)
+    nam_hoc = Column(String(20), nullable=True)
+    loai_diem = Column(UUIDType,ForeignKey(Loaidiem.id), nullable=True)
     diem = Column(Float)
 
 if __name__=='__main__':
